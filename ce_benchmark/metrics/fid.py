@@ -16,13 +16,16 @@ def run_fid(
         ref_input = get_coco_fid_stats()
     else:
         ref_input = ref
-    fid, _ = calculate_fid(
-        images_root,
-        ref_input,
-        device=device,
-        seed=seed,
-        batch_size=batch_size,
-        dataloader_workers=workers,
-        verbose=True,
-    )
+    fid_kwargs = {
+        "device": device,
+        "verbose": True,
+    }
+    if seed is not None:
+        fid_kwargs["seed"] = seed
+    if batch_size is not None:
+        fid_kwargs["batch_size"] = batch_size
+    if workers is not None:
+        fid_kwargs["dataloader_workers"] = workers
+
+    fid, _ = calculate_fid(images_root, ref_input, **fid_kwargs)
     return {"value": float(fid)}

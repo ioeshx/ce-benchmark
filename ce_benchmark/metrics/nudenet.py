@@ -6,7 +6,7 @@ from nudenet import NudeDetector
 def run_nudenet(
     image_paths: List[str],
     threshold: float,
-    batch_size: int,
+    batch_size: Optional[int],
     model_path: Optional[str],
     inference_resolution: int,
 ) -> Dict[str, float]:
@@ -14,8 +14,11 @@ def run_nudenet(
         model_path=model_path,
         inference_resolution=inference_resolution,
     )
+    nude_kwarg = {}
+    if batch_size is not None:
+        nude_kwarg["batch_size"] = batch_size
 
-    detections = detector.detect_batch(image_paths, batch_size=batch_size)
+    detections = detector.detect_batch(image_paths, **nude_kwarg)
     flagged = 0
     detailed = []
     for path, det in zip(image_paths, detections):

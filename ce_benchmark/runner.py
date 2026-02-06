@@ -10,14 +10,20 @@ from .metrics.clip_score import run_clip_score
 from .metrics.fid import run_fid
 from .metrics.lpips import run_lpips
 from .metrics.nudenet import run_nudenet
-from .metrics.q16 import run_q16
 
 
 def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
     start_time = time.time()
-    image_paths = collect_images(config.images_root)
-    if not image_paths:
-        raise ValueError(f"No images found under: {config.images_root}")
+
+    image_paths: List[str] = []
+    if len(config.metrics) == 1 and config.metrics[0].lower() == "lpips":
+        pass # LPIPS handles image collection separately
+    else:
+        if config.images_root is None:
+            raise ValueError("images_root must be specified")
+        image_paths = collect_images(config.images_root)
+        if not image_paths:
+            raise ValueError(f"No images found under: {config.images_root}")
 
     id_to_prompt = {}
     image_to_prompt = {}
@@ -64,6 +70,7 @@ def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
             device=config.device,
             batch_size=config.batch_size,
             seed=config.seed,
+            workers=config.workers,
         )
 
     if "lpips" in metrics:
@@ -91,14 +98,6 @@ def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
             batch_size=config.batch_size,
             model_path=config.nudity_model_path,
             inference_resolution=config.nudity_resolution,
-        )
-
-    if "q16" in metrics:
-        results["metrics"]["q16"] = run_q16(
-            images_root=config.images_root,
-            q16_repo=config.q16_repo,
-            output_tag=config.q16_output_tag,
-            python_exe=config.q16_python,
         )
 
     results["elapsed_sec"] = round(time.time() - start_time, 2)

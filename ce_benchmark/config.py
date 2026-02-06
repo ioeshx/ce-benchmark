@@ -9,9 +9,9 @@ class BenchmarkConfig:
     output_json: str
     metrics: List[str]
     device: str = "cuda"
-    batch_size: int
-    workers: int
-    seed: int
+    batch_size: int = None
+    workers: int = None
+    seed: int = None
     prompt_col: str = "prompt"
     id_col: str = "case_number"
     image_col: Optional[str] = None
@@ -24,7 +24,4 @@ class BenchmarkConfig:
     nudity_threshold: float = 0.2
     nudity_model_path: Optional[str] = None
     nudity_resolution: int = 320
-    q16_repo: Optional[str] = None
-    q16_output_tag: str = "q16_eval"
-    q16_python: Optional[str] = None
     extra: dict = field(default_factory=dict)
