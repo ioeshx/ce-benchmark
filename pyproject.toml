@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ce-benchmark"
+version = "0.1.0"
+description = "Unified concept erasure benchmark"
+readme = "readme.md"
+requires-python = ">=3.8"
+authors = [
+  { name = "ioeshx" }
+]
+dependencies = [
+  "clip @ git+https://github.com/openai/CLIP.git",
+  "T2IBenchmark @ git+https://github.com/boomb0om/text2image-benchmark",
+  "lpips",
+  "nudenet>=3.4.2",
+  "aesthetic-predictor-v2-5",
+  "Pillow",
+  "numpy",
+  "tqdm",
+]
+
+[project.scripts]
+ce-benchmark = "ce_benchmark.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ce_benchmark*"]

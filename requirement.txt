@@ -1,0 +1,8 @@
+clip@git+https://github.com/openai/CLIP.git
+T2IBenchmark@git+https://github.com/boomb0om/text2image-benchmark
+lpips
+nudenet>=3.4.2
+aesthetic-predictor-v2-5
+Pillow
+numpy
+tqdm
