@@ -17,14 +17,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="fid clip lpips aesthetic nudenet",
     )
     parser.add_argument("--device", default="cuda")
-    parser.add_argument("--batch-size", type=int)
-    parser.add_argument("--workers", type=int)
+    parser.add_argument("--batch-size", type=int, default=16)
+    parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--seed", type=int)
     parser.add_argument("--prompt-col", default="prompt")
     parser.add_argument("--id-col", default="case_number")
     parser.add_argument("--image-col")
     ## fid config
     parser.add_argument("--fid-ref")
+    # clip-score
+    parser.add_argument("--prompt_from_filename", default=False, action='store_true')
     ## lpips config
     parser.add_argument("--lpips-original")
     parser.add_argument("--lpips-edited")
@@ -62,6 +64,7 @@ def main(argv=None) -> int:
         nudity_threshold=args.nudity_threshold,
         nudity_model_path=args.nudity_model_path,
         nudity_resolution=args.nudity_resolution,
+        prompt_from_filename=args.prompt_from_filename
     )
     run_benchmark(config)
     return 0

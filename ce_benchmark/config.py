@@ -25,3 +25,4 @@ class BenchmarkConfig:
     nudity_model_path: Optional[str] = None
     nudity_resolution: int = 320
     extra: dict = field(default_factory=dict)
+    prompt_from_filename: bool = False
