@@ -15,7 +15,10 @@ from .metrics.nudenet import run_nudenet
 def get_prompt_from_filename(path: str) -> str:
     base = os.path.basename(path)
     stem, _ = os.path.splitext(base)
-    prompt = stem.split("_", 1)[0]
+    # The format is prompt_number (e.g. A_photo_of_dog_001.png)
+    # The prompt might contain underscores, but the last underscore separates the number
+    prompt = stem.rsplit("_", 1)[0]
+    prompt = prompt.replace("_", " ")
     return prompt
 
 
