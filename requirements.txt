@@ -1,7 +1,7 @@
-clip@git+https://github.com/openai/CLIP.git
 T2IBenchmark@git+https://github.com/boomb0om/text2image-benchmark
+clip@git+https://github.com/openai/CLIP.git
 lpips
-nudenet>=3.4.2
+nudenet
 aesthetic-predictor-v2-5
 Pillow
 numpy
