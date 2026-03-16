@@ -1,0 +1,15 @@
+{
+  "images_root": "/home/shx/code/SPEED/logs/SPEED/few_concept/instance/Snoopy_Mickey_Spongebob/Snoopy/edit",
+  "fid_ref": null,
+  "lpips_original": null,
+  "lpips_edited": null,
+  "prompt_from_filename": true,
+  "prompts_csv": null,
+  "num_images": 800,
+  "metrics": {
+    "clip_score": {
+      "value": 0.2788822081685066
+    }
+  },
+  "elapsed_sec": 20.38
+}

@@ -57,6 +57,7 @@ def run_clip_score(
     
     
     model, preprocess = clip.load("ViT-B/32", device=device)
+    model.float()  # 强制转换为 float32，避免半精度卷积报错
     model.eval()
     dataset = _CaptionImageDataset(image_paths, captions_mapping, preprocess)
     dataloader = DataLoader(
