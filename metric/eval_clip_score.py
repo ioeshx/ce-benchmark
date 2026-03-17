@@ -1,5 +1,6 @@
 import argparse
 import os
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 import csv
 import torch
 import numpy as np
