@@ -1,3 +1,9 @@
+python metric/eval_clip_score.py \
+    --images_root "/home/shx/code/ce/result/lr-1_/Snoopy_Mickey_Spongebob/Hello Kitty/edit" \
+    --prompt_from_filename \
+    --out_csv "/home/shx/code/ce/result/lr-1_/Snoopy_Mickey_Spongebob/Hello Kitty/clip_scores.csv"
+
+
 image_root="/home/shx/code/ce/result/orth_max_valid/Snoopy_to_dog_proj_t2a_proj_only"
 # image_root="/home/shx/code/ce/result/orth_max_valid/Snoopy_to_dog_proj_t2a_proj_only"
 
