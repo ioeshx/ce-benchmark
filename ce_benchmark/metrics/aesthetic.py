@@ -2,6 +2,7 @@ from typing import Dict, List, Optional
 
 from PIL import Image
 import torch
+import numpy as np
 
 from aesthetic_predictor_v2_5 import convert_v2_5_from_siglip
 
@@ -34,9 +35,14 @@ def run_aesthetic(
             pixel_values = pixel_values.to(device, dtype=dtype)
             score = model(pixel_values).logits.squeeze().float().cpu().numpy()
             scores.append(float(score))
-
+    
+    score_mean = sum(scores) / len(scores) if scores else 0.0
+    score_std = np.std(scores) if scores else 0.0
+    count = len(scores)
+    print("Aesthetic Score mean:{:.6f}, std dev:{:.6f}, count:{}".format(score_mean, score_std, count))
+    
     return {
-        "mean": float(sum(scores) / len(scores)),
-        "std dev": float(torch.std(torch.tensor(scores)).item()),
-        "count": float(len(scores)),
+        "mean": float(score_mean),
+        "std dev": float(score_std),
+        "count": float(count),
     }

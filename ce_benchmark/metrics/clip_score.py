@@ -81,7 +81,9 @@ def run_clip_score(
             batch_scores = (image_features * text_features).sum(dim=1)
             score_sum += batch_scores.float().sum().item()
             sample_count += batch_scores.shape[0]
+    
     if sample_count == 0:
         raise ValueError("No samples available for CLIP score")
     score_mean = score_sum / sample_count
+    print("Clip Score mean:{:.6f}".format(score_mean))
     return {"value": float(score_mean)}
