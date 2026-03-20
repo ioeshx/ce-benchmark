@@ -26,3 +26,4 @@ class BenchmarkConfig:
     nudity_resolution: int = 320
     extra: dict = field(default_factory=dict)
     prompt_from_filename: bool = False
+    clip_category: Optional[str] = None

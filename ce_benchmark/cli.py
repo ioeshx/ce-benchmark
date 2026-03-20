@@ -27,6 +27,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--fid-ref")
     # clip-score
     parser.add_argument("--prompt_from_filename", default=False, action='store_true')
+    parser.add_argument("clip_category", type=str)
     ## lpips config
     parser.add_argument("--lpips-original")
     parser.add_argument("--lpips-edited")
@@ -64,7 +65,8 @@ def main(argv=None) -> int:
         nudity_threshold=args.nudity_threshold,
         nudity_model_path=args.nudity_model_path,
         nudity_resolution=args.nudity_resolution,
-        prompt_from_filename=args.prompt_from_filename
+        prompt_from_filename=args.prompt_from_filename,
+        clip_category=args.clip_category,
     )
     run_benchmark(config)
     return 0

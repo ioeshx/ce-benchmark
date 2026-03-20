@@ -64,6 +64,9 @@ def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
     elif config.prompt_from_filename:
         for path in image_paths:
             captions[path] = get_prompt_from_filename(path)
+    elif config.clip_category:
+        for path in image_paths:
+            captions[path] = config.clip_category
 
     results: Dict[str, object] = {
         "images_root": config.images_root,
