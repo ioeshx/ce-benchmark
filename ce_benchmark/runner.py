@@ -53,7 +53,13 @@ def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
     image_to_prompt = {}
     captions = {}
 
-    if config.prompts_csv and not config.prompt_from_filename:
+    if config.prompt_from_filename:
+        for path in image_paths:
+            captions[path] = get_prompt_from_filename(path)
+    elif config.clip_category:
+        for path in image_paths:
+            captions[path] = config.clip_category
+    elif config.prompts_csv:
         id_to_prompt, image_to_prompt = read_prompts_csv(
             config.prompts_csv,
             prompt_col=config.prompt_col,
@@ -61,12 +67,7 @@ def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
             image_col=config.image_col,
         )
         captions = build_captions_mapping(image_paths, id_to_prompt, image_to_prompt)
-    elif config.prompt_from_filename:
-        for path in image_paths:
-            captions[path] = get_prompt_from_filename(path)
-    elif config.clip_category:
-        for path in image_paths:
-            captions[path] = config.clip_category
+    
 
     results: Dict[str, object] = {
         "images_root": config.images_root,

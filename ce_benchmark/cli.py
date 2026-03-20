@@ -27,7 +27,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--fid-ref")
     # clip-score
     parser.add_argument("--prompt_from_filename", default=False, action='store_true')
-    parser.add_argument("clip_category", type=str)
+    parser.add_argument("--clip_category", type=str)
     ## lpips config
     parser.add_argument("--lpips-original")
     parser.add_argument("--lpips-edited")
