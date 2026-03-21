@@ -30,11 +30,12 @@ def run_lpips(
 
     if not distances:
         raise ValueError("No LPIPS pairs matched by filename")
-    lpips_mean = sum(distances) / len(distances)
-    len = len(distances)
     
-    print("LPIPS mean distance:{:.6f}".format(lpips_mean), "over {} pairs".format(len))
+    lpips_mean = sum(distances) / len(distances)
+    dist_len = len(distances)
+    
+    print("LPIPS mean distance:{:.6f}".format(lpips_mean), "over {} pairs".format(dist_len))
     return {
         "mean": float(lpips_mean),
-        "count": int(len),
+        "count": int(dist_len),
     }

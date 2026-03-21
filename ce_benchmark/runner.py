@@ -114,6 +114,7 @@ def run_benchmark(config: BenchmarkConfig) -> Dict[str, object]:
     if "lpips" in metrics:
         if not config.lpips_original or not config.lpips_edited:
             raise ValueError("LPIPS requires --lpips-original and --lpips-edited")
+        print("LPIPS, original:", config.lpips_original, "edited:", config.lpips_edited)
         pairs = match_image_pairs(config.lpips_original, config.lpips_edited)
         results["metrics"]["lpips"] = run_lpips(
             pairs=pairs,
